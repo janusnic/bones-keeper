@@ -19,13 +19,13 @@ class BonesKeeperServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../../../config/config.php' => config_path('/genealabs/bones-keeper.php'),
-        ]);
-        $this->publishes([
-            __DIR__ . '/../../../../public' => public_path('genealabs/bones-keeper'),
-        ], 'public');
-        $this->loadViewsFrom(__DIR__.'/../../../views', 'bones-keeper');
+        if (! $this->app->routesAreCached()) {
+            require __DIR__ . '/../../../routes.php';
+        }
+
+        $this->publishes([__DIR__ . '/../../../config/config.php' => config_path('/genealabs-bones-keeper.php')], 'genealabs-bones-keeper');
+        $this->publishes([__DIR__ . '/../../../../public' => public_path('genealabs/bones-keeper')], 'genealabs-bones-keeper');
+        $this->loadViewsFrom(__DIR__.'/../../../views', 'genealabs-bones-keeper');
     }
 
     /**
@@ -35,7 +35,7 @@ class BonesKeeperServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        include_once(__DIR__ . '/../../../routes.php');
+
     }
 
     /**
@@ -45,6 +45,6 @@ class BonesKeeperServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return ['genealabs-bones-keeper'];
     }
 }

@@ -9,7 +9,9 @@ class Assignment extends Model
 
     public function __construct()
     {
-        $this->user = app(Config::get('auth.model'));
+        parent::__construct();
+
+        $this->user = config('auth.model');
     }
 
     public function addAllUsersToMemberRole()

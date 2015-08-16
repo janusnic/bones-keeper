@@ -5,7 +5,6 @@ use GeneaLabs\Bones\Keeper\Models\Entity;
 use GeneaLabs\Bones\Keeper\Models\Ownership;
 use GeneaLabs\Bones\Keeper\Models\Permission;
 use GeneaLabs\Bones\Keeper\Models\Role;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -29,7 +28,7 @@ class RolesController extends Controller
         if (Auth::user()->hasAccessTo('view', 'any', 'role')) {
             $roles = Role::orderBy('name')->get();
 
-            return view('bones-keeper::roles.index', compact('roles'));
+            return view('genealabs-bones-keeper::roles.index', compact('roles'));
         }
     }
 
@@ -39,7 +38,7 @@ class RolesController extends Controller
     public function create()
     {
         if (Auth::user()->hasAccessTo('add', 'any', 'role')) {
-            return view('bones-keeper::roles.create');
+            return view('genealabs-bones-keeper::roles.create');
         }
     }
 
@@ -80,9 +79,9 @@ class RolesController extends Controller
                     $permissionMatrix[$entity->name][$action->name] = $selectedOwnership;
                 }
             }
-            $ownershipOptions = array_merge(['no' => 'no'], $ownerships->lists('name', 'name'));
+            $ownershipOptions = array_merge(['no' => 'no'], $ownerships->lists('name', 'name')->toArray());
 
-            return view('bones-keeper::roles.edit', compact('role', 'permissionMatrix', 'ownershipOptions'));
+            return view('genealabs-bones-keeper::roles.edit', compact('role', 'permissionMatrix', 'ownershipOptions'));
         }
     }
 

@@ -2,13 +2,10 @@
 
 use GeneaLabs\Bones\Keeper\Models\Assignment;
 use GeneaLabs\Bones\Keeper\Models\Role;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
 
 /**
  * Class UserRolesController
@@ -43,7 +40,7 @@ class AssignmentsController extends Controller
             $users = $this->user->all();
             $roles = Role::with('users')->get();
 
-            return view('bones-keeper::assignments.index',
+            return view('genealabs-bones-keeper::assignments.index',
                 compact('users', 'roles', 'displayNameField', 'userList'));
         }
     }

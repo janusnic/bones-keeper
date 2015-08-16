@@ -29,7 +29,7 @@ composer require genealabs/bones-keeper:0.12.1@dev
 For Laravel 5 projects:
 
 ```sh
-composer require genealabs/bones-keeper:^0.13.2@dev
+composer require genealabs/bones-keeper:^0.13.8
 ```
 
 And then add the service provider to your app.php config file:
@@ -52,7 +52,7 @@ php artisan asset:publish genealabs/bones-keeper
 
 Now we need to make the assets and configuration available (for Laravel 5):
 ```php
-php artisan vendor:publish
+php artisan vendor:publish --tag=genealabs-bones-keeper
 ```
 
 ## Usage
